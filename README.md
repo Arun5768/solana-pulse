@@ -45,7 +45,7 @@ All fetches have timeouts and graceful degradation: if a source is down, the rep
 
 ## Automation strategy
 
-- `.github/workflows/update.yml` runs `solpulse.py` on a cron (`*/30 * * * *`), commits the refreshed `reports/`, and deploys to GitHub Pages.
+- `docs/github-actions-update.yml` (copy it to `.github/workflows/update.yml` in your fork) runs `solpulse.py` on a cron (`*/30 * * * *`), commits the refreshed `reports/`, and deploys to GitHub Pages.
 - Refresh interval is configurable by editing one cron line — or run locally with `--loop N` to regenerate every N seconds.
 - `reports/history.json` persists a rolling window of past runs (committed by CI), powering trend deltas and anomaly baselines with no database.
 
@@ -79,3 +79,15 @@ reports/
 - Green/red accents on the dashboard mark healthy/degraded states.
 - `report.json` top-level keys: `generated_at`, `network`, `validators`, `economics`, `supply`, `anomalies`, `warnings`, `sources`.
 - `warnings` lists any data sources that failed this run; metrics from failed sources are `null` rather than stale.
+
+## Enabling auto-updates (GitHub Actions)
+
+Copy the template into place and push:
+
+```bash
+mkdir -p .github/workflows
+cp docs/github-actions-update.yml .github/workflows/update.yml
+git add .github && git commit -m "ci: enable auto-update" && git push
+```
+
+The workflow regenerates all reports every 30 minutes and redeploys the dashboard to GitHub Pages automatically.
