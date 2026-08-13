@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="600">
+<title>SolPulse — Solana Ecosystem Dashboard</title>
+<style>
+:root{--bg:#0b0e14;--card:#131826;--border:#1f2740;--fg:#e6e9f2;--muted:#8b93ab;--accent:#9945FF;--accent2:#14F195;--warn:#f5a623;--bad:#ff5c7a}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,'Segoe UI',Roboto,sans-serif;padding:28px}
+.wrap{max-width:1180px;margin:0 auto}h1{font-size:26px;letter-spacing:-.5px}
+h1 .dot{color:var(--accent2)}.sub{color:var(--muted);margin:6px 0 22px;font-size:13px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-bottom:22px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.v{font-size:24px;font-weight:700;margin-top:4px}.s{color:var(--muted);font-size:12px;margin-top:3px}
+.pos{color:var(--accent2)}.neg{color:var(--bad)}
+section{margin-bottom:26px}h2{font-size:16px;margin-bottom:10px;color:#c4cbe0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:13px}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--border)}th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+tr:last-child td{border-bottom:0}code{color:var(--accent2);font-size:12px}
+.anom{border-left:3px solid var(--warn);background:var(--card);border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+.anom.high{border-left-color:var(--bad)}.ok{color:var(--accent2)}
+.bar{height:8px;background:#1c2338;border-radius:6px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+svg{width:100%;height:70px;margin-top:8px}.foot{color:var(--muted);font-size:12px;margin-top:26px}
+a{color:var(--accent2)}
+</style></head><body><div class="wrap">
+<h1>SolPulse<span class="dot">●</span> <span style="font-weight:400;color:var(--muted);font-size:16px">Solana Ecosystem Dashboard</span></h1>
+<p class="sub" id="sub"></p>
+<div class="grid" id="cards"></div>
+<section id="anoms-sec"><h2>Anomaly Detection</h2><div id="anoms"></div></section>
+<section><h2>TPS (last 30 minutes)</h2><div class="card"><svg id="spark" viewBox="0 0 600 70" preserveAspectRatio="none"></svg></div></section>
+<section><h2>Top Validators by Stake</h2><table id="vals"><thead><tr><th>#</th><th>Vote account</th><th>Stake (SOL)</th><th>Share</th><th>Commission</th></tr></thead><tbody></tbody></table></section>
+<section><h2>Upcoming Developments</h2><table id="devs"><thead><tr><th>Item</th><th>Summary</th></tr></thead><tbody></tbody></table></section>
+<p class="foot">Auto-refreshes every 10 min. Data: Solana mainnet RPC · DeFiLlama · CoinGecko — no API keys. Built with Python stdlib. <a href="report.md">Markdown report</a> · <a href="report.json">JSON</a></p>
+</div>
+<script>
+const D={"report": {"generated_at_utc": "2026-08-13 21:07:56 UTC", "refresh_interval_seconds": 600, "network": {"epoch": 1016, "slot": 439092897, "block_height": 417144387, "epoch_progress_pct": 41.87, "total_transactions": 537907356349, "tps_current": 3889.9, "tps_avg_30m": 3780.2, "tps_series": [4114.3, 3648.0, 3339.8, 3672.1, 3720.8, 4348.7, 3660.0, 3755.7, 4291.2, 4450.7, 3907.8, 4080.0, 3799.8, 3533.3, 3745.7, 3447.0, 3719.6, 3163.6, 3644.9, 3502.0, 3593.9, 3885.1, 3961.2, 3705.6, 3389.2, 3598.7, 4216.4, 4321.6, 3297.9, 3889.9], "slot_time_ms": 419.2, "rpc_health": "ok", "node_version": "4.2.0", "latest_block_time_utc": "2026-08-13T21:07:42+00:00"}, "validators": {"active": 688, "delinquent": 9, "total": 697, "delinquent_pct": 1.29, "total_stake_sol": 434669916, "top_n": 10, "top_n_stake_pct": 24.44, "median_commission_pct": 5.0, "top_validators": [{"vote_pubkey": "CcaHc2L43ZWjwCHART3oZoJvHLAe9hzT2DJNUpBzoTN1", "stake_sol": 17055967, "stake_pct": 3.92, "commission_pct": 7}, {"vote_pubkey": "he1iusunGwqrNtafDtLdhsUQDFvo13z9sUa36PauBtk", "stake_sol": 15972699, "stake_pct": 3.67, "commission_pct": 0}, {"vote_pubkey": "CatzoSMUkTRidT5DwBxAC2pEtnwMBTpkCepHkFgZDiqb", "stake_sol": 12477808, "stake_pct": 2.87, "commission_pct": 5}, {"vote_pubkey": "3N7s9zXMZ4QqvHQR15t5GNHyqc89KduzMP7423eWiD5g", "stake_sol": 12363210, "stake_pct": 2.84, "commission_pct": 0}, {"vote_pubkey": "26pV97Ce83ZQ6Kz9XT4td8tdoUFPTng8Fb8gPyc53dJx", "stake_sol": 9161872, "stake_pct": 2.11, "commission_pct": 7}, {"vote_pubkey": "51JBzSTU5rAM8gLAVQKgp4WoZerQcSqWC7BitBzgUNAm", "stake_sol": 8981437, "stake_pct": 2.07, "commission_pct": 10}, {"vote_pubkey": "8GbwASqdpw4dVcwbWUxbHXMrjyQx2aKkoBR5H1GJF8iD", "stake_sol": 8300271, "stake_pct": 1.91, "commission_pct": 0}, {"vote_pubkey": "9QU2QSxhb24FUX3Tu2FpczXjpK3VYrvRudywSZaM29mF", "stake_sol": 7966398, "stake_pct": 1.83, "commission_pct": 7}, {"vote_pubkey": "CvSb7wdQAFpHuSpTYTJnX5SYH4hCfQ9VuGnqrKaKwycB", "stake_sol": 7372731, "stake_pct": 1.7, "commission_pct": 5}, {"vote_pubkey": "DumiCKHVqoCQKD8roLApzR5Fit8qGV5fVQsJV9sTZk4a", "stake_sol": 6581887, "stake_pct": 1.51, "commission_pct": 0}]}, "supply": {"total_sol": 632135553, "circulating_sol": 582613932, "non_circulating_sol": 49521621, "circulating_pct": 92.17}, "economics": {"sol_price_usd": 76.21, "market_cap_usd": 44402002151.899284, "volume_24h_usd": 1168998601.3174334, "price_change_24h_pct": 0.55, "tvl_usd": 4836621951, "stablecoin_supply_usd": 15491780131, "dex_volume_24h_usd": 1725631800.93, "dex_volume_7d_usd": 10539258958.990002, "dex_protocol_count": 115}, "ecosystem": {"upcoming": [{"name": "Alpenglow", "summary": "Consensus overhaul (Votor + Rotor) replacing TowerBFT/Proof-of-History voting; targets ~150ms finality.", "reference": "https://www.anza.xyz/blog/alpenglow-a-new-consensus-for-solana"}, {"name": "SIMD-0326 / SIMD-525 track", "summary": "Ongoing SIMD governance proposals; monitor the solana-improvement-documents repo for status.", "reference": "https://github.com/solana-foundation/solana-improvement-documents"}], "watch": ["Tokenized equities volume (xStocks et al.) as an ecosystem growth signal", "Firedancer validator client adoption share"]}, "collection_errors": [], "anomalies": []}, "history": [{"t": "2026-08-13 21:07:56 UTC", "tps": 3889.9, "sol_price_usd": 76.21, "tvl_usd": 4836621951, "delinquent_pct": 1.29}]};const r=D.report,n=r.network,v=r.validators,e=r.economics,s=r.supply;
+const usd=x=>x==null?"—":x>=1e9?"$"+(x/1e9).toFixed(2)+"B":x>=1e6?"$"+(x/1e6).toFixed(1)+"M":"$"+Math.round(x).toLocaleString();
+document.getElementById("sub").textContent="Generated "+r.generated_at_utc+" · RPC health: "+n.rpc_health+" · node "+(n.node_version||"—");
+const chg=e.price_change_24h_pct||0;
+const cards=[
+["SOL Price","$"+(e.sol_price_usd??"—"),(chg>=0?"+":"")+chg+"% 24h",chg>=0?"pos":"neg"],
+["Market Cap",usd(e.market_cap_usd),"24h vol "+usd(e.volume_24h_usd)],
+["DeFi TVL",usd(e.tvl_usd),"Stablecoins "+usd(e.stablecoin_supply_usd)],
+["DEX Volume 24h",usd(e.dex_volume_24h_usd),"7d "+usd(e.dex_volume_7d_usd)],
+["Current TPS",n.tps_current??"—","30m avg "+(n.tps_avg_30m??"—")],
+["Slot Time",(n.slot_time_ms??"—")+" ms","Slot "+(n.slot??0).toLocaleString()],
+["Epoch "+(n.epoch??"—"),(n.epoch_progress_pct??"—")+"%","progress",null,n.epoch_progress_pct],
+["Validators",v.active??"—",(v.delinquent??"—")+" delinquent ("+(v.delinquent_pct??"—")+"%)",(v.delinquent_pct>5?"neg":"pos")],
+["Total Stake",((v.total_stake_sol??0)/1e6).toFixed(1)+"M SOL","Top "+(v.top_n||10)+" hold "+(v.top_n_stake_pct??"—")+"%"],
+["Circulating",((s.circulating_sol??0)/1e6).toFixed(1)+"M SOL",(s.circulating_pct??"—")+"% of supply"],
+["Total Txns",((n.total_transactions??0)/1e9).toFixed(1)+"B","all-time"],
+["Median Commission",(v.median_commission_pct??"—")+"%","across active validators"]];
+document.getElementById("cards").innerHTML=cards.map(c=>`<div class="card"><div class="k">${c[0]}</div><div class="v ${c[3]||""}">${c[1]}</div><div class="s">${c[2]||""}</div>${c[4]!=null?`<div class="bar"><i style="width:${c[4]}%"></i></div>`:""}</div>`).join("");
+const an=r.anomalies||[];
+document.getElementById("anoms").innerHTML=an.length?an.map(a=>`<div class="anom ${a.severity}"><b>[${a.severity.toUpperCase()}] ${a.metric}</b> — ${a.message}</div>`).join(""):'<div class="card ok">✓ No anomalies detected — all monitored metrics within thresholds.</div>';
+const ts=n.tps_series||[];
+if(ts.length>1){const mx=Math.max(...ts),mn=Math.min(...ts),rg=mx-mn||1;
+const pts=ts.map((t,i)=>`${(i/(ts.length-1))*600},${65-((t-mn)/rg)*58}`).join(" ");
+document.getElementById("spark").innerHTML=`<polyline points="${pts}" fill="none" stroke="#14F195" stroke-width="2"/><text x="4" y="12" fill="#8b93ab" font-size="10">max ${mx}</text><text x="4" y="66" fill="#8b93ab" font-size="10">min ${mn}</text>`;}
+document.querySelector("#vals tbody").innerHTML=(v.top_validators||[]).map((x,i)=>`<tr><td>${i+1}</td><td><code>${x.vote_pubkey}</code></td><td>${x.stake_sol.toLocaleString()}</td><td>${x.stake_pct}%</td><td>${x.commission_pct}%</td></tr>`).join("");
+document.querySelector("#devs tbody").innerHTML=(r.ecosystem.upcoming||[]).map(u=>`<tr><td><a href="${u.reference}">${u.name}</a></td><td>${u.summary}</td></tr>`).join("");
+</script></body></html>

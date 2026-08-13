@@ -1,0 +1,158 @@
+{
+  "generated_at_utc": "2026-08-13 21:07:56 UTC",
+  "refresh_interval_seconds": 600,
+  "network": {
+    "epoch": 1016,
+    "slot": 439092897,
+    "block_height": 417144387,
+    "epoch_progress_pct": 41.87,
+    "total_transactions": 537907356349,
+    "tps_current": 3889.9,
+    "tps_avg_30m": 3780.2,
+    "tps_series": [
+      4114.3,
+      3648.0,
+      3339.8,
+      3672.1,
+      3720.8,
+      4348.7,
+      3660.0,
+      3755.7,
+      4291.2,
+      4450.7,
+      3907.8,
+      4080.0,
+      3799.8,
+      3533.3,
+      3745.7,
+      3447.0,
+      3719.6,
+      3163.6,
+      3644.9,
+      3502.0,
+      3593.9,
+      3885.1,
+      3961.2,
+      3705.6,
+      3389.2,
+      3598.7,
+      4216.4,
+      4321.6,
+      3297.9,
+      3889.9
+    ],
+    "slot_time_ms": 419.2,
+    "rpc_health": "ok",
+    "node_version": "4.2.0",
+    "latest_block_time_utc": "2026-08-13T21:07:42+00:00"
+  },
+  "validators": {
+    "active": 688,
+    "delinquent": 9,
+    "total": 697,
+    "delinquent_pct": 1.29,
+    "total_stake_sol": 434669916,
+    "top_n": 10,
+    "top_n_stake_pct": 24.44,
+    "median_commission_pct": 5.0,
+    "top_validators": [
+      {
+        "vote_pubkey": "CcaHc2L43ZWjwCHART3oZoJvHLAe9hzT2DJNUpBzoTN1",
+        "stake_sol": 17055967,
+        "stake_pct": 3.92,
+        "commission_pct": 7
+      },
+      {
+        "vote_pubkey": "he1iusunGwqrNtafDtLdhsUQDFvo13z9sUa36PauBtk",
+        "stake_sol": 15972699,
+        "stake_pct": 3.67,
+        "commission_pct": 0
+      },
+      {
+        "vote_pubkey": "CatzoSMUkTRidT5DwBxAC2pEtnwMBTpkCepHkFgZDiqb",
+        "stake_sol": 12477808,
+        "stake_pct": 2.87,
+        "commission_pct": 5
+      },
+      {
+        "vote_pubkey": "3N7s9zXMZ4QqvHQR15t5GNHyqc89KduzMP7423eWiD5g",
+        "stake_sol": 12363210,
+        "stake_pct": 2.84,
+        "commission_pct": 0
+      },
+      {
+        "vote_pubkey": "26pV97Ce83ZQ6Kz9XT4td8tdoUFPTng8Fb8gPyc53dJx",
+        "stake_sol": 9161872,
+        "stake_pct": 2.11,
+        "commission_pct": 7
+      },
+      {
+        "vote_pubkey": "51JBzSTU5rAM8gLAVQKgp4WoZerQcSqWC7BitBzgUNAm",
+        "stake_sol": 8981437,
+        "stake_pct": 2.07,
+        "commission_pct": 10
+      },
+      {
+        "vote_pubkey": "8GbwASqdpw4dVcwbWUxbHXMrjyQx2aKkoBR5H1GJF8iD",
+        "stake_sol": 8300271,
+        "stake_pct": 1.91,
+        "commission_pct": 0
+      },
+      {
+        "vote_pubkey": "9QU2QSxhb24FUX3Tu2FpczXjpK3VYrvRudywSZaM29mF",
+        "stake_sol": 7966398,
+        "stake_pct": 1.83,
+        "commission_pct": 7
+      },
+      {
+        "vote_pubkey": "CvSb7wdQAFpHuSpTYTJnX5SYH4hCfQ9VuGnqrKaKwycB",
+        "stake_sol": 7372731,
+        "stake_pct": 1.7,
+        "commission_pct": 5
+      },
+      {
+        "vote_pubkey": "DumiCKHVqoCQKD8roLApzR5Fit8qGV5fVQsJV9sTZk4a",
+        "stake_sol": 6581887,
+        "stake_pct": 1.51,
+        "commission_pct": 0
+      }
+    ]
+  },
+  "supply": {
+    "total_sol": 632135553,
+    "circulating_sol": 582613932,
+    "non_circulating_sol": 49521621,
+    "circulating_pct": 92.17
+  },
+  "economics": {
+    "sol_price_usd": 76.21,
+    "market_cap_usd": 44402002151.899284,
+    "volume_24h_usd": 1168998601.3174334,
+    "price_change_24h_pct": 0.55,
+    "tvl_usd": 4836621951,
+    "stablecoin_supply_usd": 15491780131,
+    "dex_volume_24h_usd": 1725631800.93,
+    "dex_volume_7d_usd": 10539258958.990002,
+    "dex_protocol_count": 115
+  },
+  "ecosystem": {
+    "upcoming": [
+      {
+        "name": "Alpenglow",
+        "summary": "Consensus overhaul (Votor + Rotor) replacing TowerBFT/Proof-of-History voting; targets ~150ms finality.",
+        "reference": "https://www.anza.xyz/blog/alpenglow-a-new-consensus-for-solana"
+      },
+      {
+        "name": "SIMD-0326 / SIMD-525 track",
+        "summary": "Ongoing SIMD governance proposals; monitor the solana-improvement-documents repo for status.",
+        "reference": "https://github.com/solana-foundation/solana-improvement-documents"
+      }
+    ],
+    "watch": [
+      "Tokenized equities volume (xStocks et al.) as an ecosystem growth signal",
+      "Firedancer validator client adoption share"
+    ]
+  },
+  "collection_errors": [],
+  "anomalies": []
+}
